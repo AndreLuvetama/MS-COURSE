@@ -24,9 +24,7 @@ import com.microservices.worker.repositories.WorkerRepository;
 public class WorkerResource {
 	
 	private static Logger logger = LoggerFactory.getLogger(WorkerResource.class);
-	
-	
-	
+		
 	@Autowired
 	private Environment env;
 	
