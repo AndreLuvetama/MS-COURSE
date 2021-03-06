@@ -5,7 +5,6 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 
 import org.springframework.core.env.Environment;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +22,7 @@ import com.microservices.worker.repositories.WorkerRepository;
 @RequestMapping(value = "/workers")
 public class WorkerResource {
 	
-	private static Logger logger = LoggerFactory.getLogger(WorkerResource.class);
+	private static Logger logger = LoggerFactory.getLogger(WorkerResource.class); // gera log
 		
 	@Autowired
 	private Environment env;
@@ -36,6 +35,7 @@ public class WorkerResource {
 		List<Worker> list = repository.findAll();
 		return ResponseEntity.ok(list);
 	}	
+	
 	
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<Worker> findById(@PathVariable Long id) {
