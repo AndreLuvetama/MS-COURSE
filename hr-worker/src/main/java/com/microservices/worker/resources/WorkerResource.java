@@ -31,9 +31,7 @@ public class WorkerResource {
 	private Environment env;
 	
 	@Autowired
-	private WorkerRepository repository;
-	
-		
+	private WorkerRepository repository;	
 	
 	@GetMapping
 	public ResponseEntity<List<Worker>> findAll() {
