@@ -12,11 +12,8 @@ import org.springframework.stereotype.Service;
 import com.microservices.hroauth.entities.User;
 import com.microservices.hroauth.feignclients.UserFeignClient;
 
-
-
-
 @Service
-public class UserService implements UserDetailsService  {
+public class UserService implements UserDetailsService {
 
 	private static Logger logger = LoggerFactory.getLogger(UserService.class);
 	
@@ -32,7 +29,7 @@ public class UserService implements UserDetailsService  {
 		logger.info("Email found: " + email);
 		return user;
 	}
- 
+
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		User user = userFeignClient.findByEmail(username).getBody();
@@ -43,6 +40,4 @@ public class UserService implements UserDetailsService  {
 		logger.info("Email found: " + username);
 		return user;
 	}
-
-	
 }

@@ -14,7 +14,7 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
 @Configuration
 @EnableAuthorizationServer
-public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter{
+public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
 	
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
@@ -24,23 +24,23 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	
 	@Autowired
 	private JwtTokenStore tokenStore;
-	
+
 	@Autowired
 	private AuthenticationManager authenticationManager;
-
+		
 	@Override
 	public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
-		
 		security.tokenKeyAccess("permitAll()").checkTokenAccess("isAuthenticated()");
 	}
 
 	@Override
 	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-		clients.inMemory() // Autenticação vai ocorrer somente em memória
+		clients.inMemory()
 		.withClient("myappname123")
 		.secret(passwordEncoder.encode("myappsecret123"))
 		.scopes("read", "write")
-		.accessTokenValiditySeconds(86400); //duração do token é de 24h
+		.authorizedGrantTypes("password")
+		.accessTokenValiditySeconds(86400);
 	}
 
 	@Override
@@ -49,7 +49,4 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 		.tokenStore(tokenStore)
 		.accessTokenConverter(accessTokenConverter);
 	}
-
-	
-	
 }
